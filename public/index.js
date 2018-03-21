@@ -4,11 +4,29 @@ app.controller("UserController", function ($scope, $log, $http, $window, $locati
 
     $scope.commentsList = [];
     $scope.isLoading = false;
+
+    $scope.emailsearch ="";
+
+    $scope.$watch('emailsearch', function(newValue,oldValue) {
+        if (!oldValue) {
+            //bookmark = $scope.query.page;
+        }
+
+        if (newValue !== oldValue) {
+          //  $scope.query.page = newValue.page;
+        }
+
+        if (!newValue) {
+           // $scope.query.page = bookmark;
+        }
+
+        $scope.getUsers();
+      },false);
+
     $scope.getUsers = function () {
         $scope.isLoading = true;
-
         $timeout(function () {
-            $http.get("https://jsonplaceholder.typicode.com/comments").then(function success(response) {
+            $http.get("https://jsonplaceholder.typicode.com/comments?email="+$scope.emailsearch).then(function success(response) {
                 $scope.commentsList = response.data
                 $scope.isLoading = !$scope.isLoading;
             }, function error(error) {
@@ -18,7 +36,7 @@ app.controller("UserController", function ($scope, $log, $http, $window, $locati
                 $window.location.href = '/error.html';
             });
 
-        }, 2000);
+        }, 1000);
 
 
     }

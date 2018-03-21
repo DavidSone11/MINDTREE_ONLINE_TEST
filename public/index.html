@@ -20,6 +20,23 @@
 
     } */
 
+    .success {
+      background-color: green;
+    }
+
+    .warning {
+      background-color: yellow;
+    }
+
+    .danger {
+      background-color: red;
+    }
+
+    .bg-primary {
+      color: white;
+      background-color: blue;
+    }
+
     body {
       width: 100%;
       height: 100%;
@@ -48,6 +65,18 @@
       margin-top: -32px;
       display: block;
     }
+
+    tr:nth-child(even) {
+      background: #CCC
+    }
+
+    tr:nth-child(odd) {
+      background: #FFF
+    }
+
+    .selected-row-section{
+      background-color: red;
+    }
   </style>
 
 
@@ -62,7 +91,7 @@
   <div class="container" ng-app="onlineApp" ng-controller="UserController">
     <div class="row">
 
-      <table class="table table-striped table-hover table-condensed">
+      <table class="table table-hover table-condensed">
         <thead>
           <tr>
             <th>POSTID</th>
@@ -85,7 +114,7 @@
               <input type="text" class="form-control" id="name">
             </th>
             <th>
-              <input type="text" class="form-control" id="email" ng-model="emailsearch">
+              <input type="text" class="form-control" id="email" ng-model="query.emailsearch">
             </th>
 
             <th>
@@ -94,12 +123,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="users in commentsList | limitTo: 10">
-            <td>{{users.postId}}</td>
-            <td>{{users.id}}</td>
-            <td>{{users.name}}</td>
-            <td>{{users.email}}</td>
-            <td>{{users.body}}</td>
+          <tr ng-repeat="com in commentsList | limitTo: 10" ng-class="selectedTrainStations[$index].cssClass" ng-click="rowClicked($index)">
+            <td>{{com.postId}}</td>
+            <td>{{com.id}}</td>
+            <td>{{com.name}}</td>
+            <td>{{com.email}}</td>
+            <td>{{com.body}}</td>
           </tr>
         </tbody>
         <tbody>

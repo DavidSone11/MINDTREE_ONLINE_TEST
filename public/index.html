@@ -6,19 +6,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+
   <script src="index.js"></script>
 
   <style>
-    /* table {
-      white-space: nowrap;
-      width: 50px;
+    table {
+      width: 100%;
+    }
+
+    td {
+      max-width: 0;
       overflow: hidden;
       text-overflow: ellipsis;
-
-    } */
+      white-space: nowrap;
+    }
 
     .success {
       background-color: green;
@@ -74,75 +80,110 @@
       background: #FFF
     }
 
-    .selected-row-section{
-      background-color: red;
+    .selected-row-section {
+      background-color: #d5e427!important;
+      cursor: pointer;
     }
   </style>
-
-
 </head>
 
 <body>
-
   <div class="text-center">
     <h1>Online Test</h1>
   </div>
 
   <div class="container" ng-app="onlineApp" ng-controller="UserController">
     <div class="row">
+      <div class="panel panel-default">
+        <div class="panel-heading">
 
-      <table class="table table-hover table-condensed">
-        <thead>
-          <tr>
-            <th>POSTID</th>
-            <th>ID</th>
-            <th>NAME</th>
-            <th>EMAIL</th>
-            <th>body</th>
-          </tr>
-        </thead>
+          <div class="panel-title pull-left">
+            List of Comments
+          </div>
+          <div class="pull-right">
+            <input type="number" class="form-control" id="limit" ng-model="query.limit">
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th>POSTID</th>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>body</th>
+              </tr>
+            </thead>
 
-        <thead>
-          <tr>
-            <th>
-              <input type="text" class="form-control" id="postid">
-            </th>
-            <th>
-              <input type="text" class="form-control" id="id">
-            </th>
-            <th>
-              <input type="text" class="form-control" id="name">
-            </th>
-            <th>
-              <input type="text" class="form-control" id="email" ng-model="query.emailsearch">
-            </th>
+            <thead>
+              <tr>
+                <th>
+                  <input type="text" class="form-control" id="postid">
+                </th>
+                <th>
+                  <input type="text" class="form-control" id="id">
+                </th>
+                <th>
+                  <input type="text" class="form-control" id="name">
+                </th>
+                <th>
+                  <input type="text" class="form-control" id="email" ng-model="query.emailsearch">
+                </th>
 
-            <th>
-              <input type="text" class="form-control" id="body">
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="com in commentsList | limitTo: 10" ng-class="selectedTrainStations[$index].cssClass" ng-click="rowClicked($index)">
-            <td>{{com.postId}}</td>
-            <td>{{com.id}}</td>
-            <td>{{com.name}}</td>
-            <td>{{com.email}}</td>
-            <td>{{com.body}}</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <td colspan="130">
-            <div id="mydiv" ng-show="isLoading">
-              <img src="images/lg.azure-round-loader.gif" height="50" width="50" class="ajax-loader">
-              <span style="left: 50%;top: 55%;margin-left: -32px;margin-top: -10px;position:absolute;color:#fff">
-                <h4>Loading.......</h4>
-              </span>
+                <th>
+                  <input type="text" class="form-control" id="body">
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="com in commentsList | limitTo: query.limit" ng-class="selectedTrainStations[$index].cssClass" ng-click="rowClicked($index,com)">
+                <td>{{com.postId}}</td>
+                <td>{{com.id}}</td>
+                <td>{{com.name}}</td>
+                <td>{{com.email}}</td>
+                <td>{{com.body}}</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <td colspan="130">
+                <div id="mydiv" ng-show="isLoading">
+                  <img src="images/lg.azure-round-loader.gif" height="50" width="50" class="ajax-loader">
+                  <span style="left: 50%;top: 55%;margin-left: -32px;margin-top: -10px;position:absolute;color:#fff">
+                    <h4>Loading.......</h4>
+                  </span>
+                </div>
+              </td>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <div class="panel panel-primary" ng-show="isDisplay">
+        <div class="panel-heading">Panel Heading</div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-12">
+              EMAIL :{{userdetails.email}}
+              POSTID :{{userdetails.postId}}
+              ID :{{userdetails.id}}
+              NAME :{{userdetails.name}}
+              BODY :{{userdetails.body}}
+
+
+
             </div>
-          </td>
-        </tbody>
-      </table>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">Panel Footer</div>
     </div>
+
+
+
+  </div>
   </div>
 </body>
 

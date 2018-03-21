@@ -1,0 +1,28 @@
+{
+  "name": "public",
+  "main": "index.js",
+  "homepage": "www.online.com",
+  "authors": [
+    "santosh"
+  ],
+  "description": "ONLINE TEST",
+  "keywords": [
+    "JS",
+    "CSS",
+    "ANGULAR",
+    "JS"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular-ui-bootstrap": "^2.5.6",
+    "angular-bootstrap": "^2.5.0"
+  }
+}
